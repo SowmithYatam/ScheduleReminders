@@ -19,7 +19,7 @@ as source of truth.
 
 Also Implemented TimerTask based logic to schedule reminders.
 
-Change the logic in ReminderImpl to use cache or timerTask.
+Change the logic in ReminderImpl to switch between cache and timerTask.
 
 Yet to complete:
 
