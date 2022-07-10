@@ -1,0 +1,24 @@
+This project is built using Java and Microprofile which is a CDI Framework. This application will run on Open Liberty
+
+Command to RUN : mvn liberty:run
+
+[GET] ALL Remainders : http://localhost:8282
+[POST] Remainder : http://localhost:8282 @Body -> {userId:"",title:"",message:"",sendTime:"",phoneNumber:"",emailId:""}
+[PUT] Remainder: same as above
+[DELETE] Remainder : http://localhost:8282?id=""
+
+
+Once a reminder is created, we put this entry into cache with TTL. Where TTL is diff between current time and send time.
+As soon as the entry is expired.A callback to the Message logic will executed.
+
+cache used is Ehcache which is a JCache implementation. And Embedded DB (Derby) is used to store the reminder data.
+
+I have used, cache's TTL to send message on time. But we can also use Timer in java.
+
+Yet to complete:
+
+Testing is not done on the message execution part.
+Status will not change even if the message is executed.
+Although I have started with creating a UI Component for creating and reading the reminders, I couldnt proceed due to the timeframe
+User based login is not implemented.
+Would have loved to host this any k8s platform, but couldnt get enough time

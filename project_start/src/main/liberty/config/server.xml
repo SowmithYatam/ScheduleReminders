@@ -1,0 +1,31 @@
+<server description="Sample Liberty server">
+
+  <featureManager>
+    <feature>restfulWS-3.0</feature>
+    <feature>jsonb-2.0</feature>
+    <feature>jsonp-2.0</feature>
+    <feature>cdi-3.0</feature>
+    <feature>mpConfig-3.0</feature>
+    <feature>mpRestClient-3.0</feature>
+    <feature>servlet-5.0</feature>
+    <feature>persistence-3.0</feature>
+  </featureManager>
+
+  <variable name="default.http.port" defaultValue="8585"/>
+  <variable name="default.https.port" defaultValue="8443"/>
+
+  <httpEndpoint host="*" httpPort="${default.http.port}" httpsPort="${default.https.port}"
+                id="defaultHttpEndpoint"/>
+  <!-- Derby Library Configuration -->
+  <library id="derbyJDBCLib">
+    <fileset dir="${shared.resource.dir}/" includes="derby*.jar" />
+  </library>
+
+  <!-- Datasource Configuration -->
+  <dataSource id="reminderjpadatasource" jndiName="jdbc/reminderjpadatasource">
+    <jdbcDriver libraryRef="derbyJDBCLib" />
+    <properties.derby.embedded databaseName="EventDB" createDatabase="create" />
+  </dataSource>
+  <webApplication location="talentship.war" contextRoot="/"/>
+
+</server>
